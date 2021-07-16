@@ -8,8 +8,8 @@ import org.springframework.jms.annotation.EnableJms;
 @EnableJms
 public class JmsClientApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JmsClientApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(JmsClientApplication.class, args);
+    }
 
 }
