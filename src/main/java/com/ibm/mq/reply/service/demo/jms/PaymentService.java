@@ -26,7 +26,6 @@ public class PaymentService {
     @JmsListener(destination = "DEV.QUEUE.1")
     public void receive(Message message) throws JMSException {
         TextMessage textMessage = (TextMessage) message;
-        log.info("reply to is '{}'", textMessage.getJMSReplyTo());
         final String textMessageBody = textMessage.getText();
         log.info("### 2 ### Payment Service received message: {} with correlationId: {}",
                 textMessageBody,
@@ -35,8 +34,6 @@ public class PaymentService {
         Random random = new Random(); //message to convertAndSend
         String orderCompleted = (random.nextInt(101) >= 20) ? "payment_ok" : "payment_failed";
         // send response
-        MQQueue destinationQueue = new MQQueue("DEV.QUEUE.2");
-        textMessage.setJMSReplyTo(destinationQueue);
         log.info("### 3 ### Payment Service sending response");
         log.info("destination is '{}' and '{}'",
                 textMessage.getJMSDestination(),
